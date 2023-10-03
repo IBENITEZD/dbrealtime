@@ -22,8 +22,8 @@ void main() async {
 
   runApp(const MyApp());
 }
-
-class MyApp extends StatelessWidget {
+//StatefulWidget  --> StatelessWidget
+class MyApp extends StatelessWidget  {
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Flutter Cloud Database Realtime"),
+          title: const Text("Flutter Database Realtime"),
         ),
         body: const PeopleWidget(),
       ),

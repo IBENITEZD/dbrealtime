@@ -29,7 +29,8 @@ class _PeopleWidgetState extends State<PeopleWidget> {
   @override
   void initState() {
     super.initState();
-    plpCtrl.start();
+    plpCtrl.start();    
+    miFuncion();
   }
 
   // Metodo para detener la instancia de los listeners
@@ -54,10 +55,11 @@ class _PeopleWidgetState extends State<PeopleWidget> {
         ),
         subtitle: Text("${position.latitude}, ${position.longitude}"),
         onTap: () async {
-          String googleUrl =
-              'https://www.google.com/maps/search/?api=1&query=${position.latitude},${position.longitude}';
-          if (await canLaunch(googleUrl)) {
-            await launch(googleUrl);
+          String url = 'https://www.google.com/maps/search/?api=1&query=${position.latitude},${position.longitude}';
+          if (await canLaunchUrl(Uri.parse(url))) {
+            await launchUrl(Uri.parse(url));
+          } else {
+            //throw 'Could not launch $url';
           }
         },
       ),
@@ -139,8 +141,16 @@ class _PeopleWidgetState extends State<PeopleWidget> {
   // Metodo para enviar mensajes
   Future<void> _add() async {
     _getPosition();
-    await plpCtrl
-        .addPosition(Position(_msgCtrl.text,  lat,  long));
+    await plpCtrl.addPosition(Position(_msgCtrl.text, lat, long));
+  }
+
+
+ void miFuncion() {
+    // Coloca aquí el código que deseas ejecutar al iniciar el StatefulWidget
+    //print('El StatefulWidget se ha iniciado.');
+    _msgCtrl.text = 'Posicion inicial';
+    _add();
+    _msgCtrl.text = '';
   }
 
   @override
